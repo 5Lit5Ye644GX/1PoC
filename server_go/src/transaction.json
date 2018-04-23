@@ -1,0 +1,41 @@
+{  
+   "error":null,
+   "id":"multichain-client",
+   "result":[
+      {
+         "addresses":[
+            "12po4Mx9N9fPiJqJsM796WH7ZSfQjSBxd8vT45"
+         ],
+         "balance":{
+            "amount":0,
+            "assets":[
+               {
+                  "assetref":"82-266-30420",
+                  "name":"asset1",
+                  "qty":69
+               }
+            ]
+         },
+         "blockhash":"00220a3ccf9709775edff90171847cd6225c9defa994a37f74b9f091737f6a82",
+         "blockindex":1,
+         "blocktime":1521564899,
+         "confirmations":11,
+         "data":[
+
+         ],
+         "items":[
+
+         ],
+         "myaddresses":[
+            "12VnKkYEb7ZsXPFZvNpQsqNkQJBvbMmZiyZaeW"
+         ],
+         "permissions":[
+
+         ],
+         "time":1521564885,
+         "timereceived":1521564885,
+         "txid":"ef0da0e9110593f548a471a31fe997be02397e0f8f42ab21b78a5201376b5a38",
+         "valid":true
+      }
+   ]
+}

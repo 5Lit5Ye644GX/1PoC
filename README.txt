@@ -1,5 +1,3 @@
-# 1PoC
-Poc on multichain, transactions between peers
 ==========================================================
 ==========================================================
 HOW TO INSTALL AND RUN THE PROTOTYPE
