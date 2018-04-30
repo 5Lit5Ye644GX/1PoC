@@ -137,30 +137,40 @@ func main() {
 
 //	Function that will call sub functions depending on the user's choice.
 func choice(client *multichain.Client, address string, RewardName string) (int, error) {
+	c := exec.Command("clear") // Efface l'écran
+	c.Stdout = os.Stdout
+	c.Run()
 	var res int
-	fmt.Printf("============== MENU ============== \n Choisir une action parmi les actions proposees suivantes \n Et entrer le numéro correspondant à la suite. \n Quitter 0) \n Menu Administrateur 1) \n Menu Client 2) \n")
-	_, err := fmt.Scanf("%d\n", &res)
-	if err != nil { // SCAN is Not OK
-		fmt.Printf("Wrong imput, please try again.\n")
-		//return 0, err
-	} else { // Scan is OK
-		fmt.Printf("On a choisi : %d ", res)
-		switch res {
-		case 1: // Admin menu
-			fmt.Printf("Menu Admin \n")
-			err = ChoiceAdmin(client, RewardName)
-		case 2: // Client menu
-			fmt.Printf("Menu Client \n")
-			err = ChoiceClient(client, RewardName, address)
-		case 0: // Exit
-			fmt.Println("Exiting.")
-			os.Exit(0)
-		default:
-			fmt.Println("Not an option")
+	for true {
+		c := exec.Command("clear") // Efface l'écran
+		c.Stdout = os.Stdout
+		c.Run()
+
+		fmt.Printf("============== MENU ============== \n Choisir une action parmi les actions proposees suivantes \n Et entrer le numéro correspondant à la suite. \n Quitter 0) \n Menu Administrateur 1) \n Menu Client 2) \n ============================== \n")
+		_, err := fmt.Scanf("%d\n", &res)
+		if err != nil { // SCAN is Not OK
+			fmt.Printf("Wrong imput, please try again.\n")
+			//return 0, err
+		} else { // Scan is OK
+			fmt.Printf("On a choisi : %d ", res)
+			switch res {
+			case 1: // Admin menu
+				fmt.Printf("Menu Admin \n")
+				err = ChoiceAdmin(client, RewardName)
+			case 2: // Client menu
+				fmt.Printf("Menu Client \n")
+				err = ChoiceClient(client, RewardName, address)
+			case 0: // Exit
+				//fmt.Println("Exiting.")
+				//os.Exit(0)
+				return 0, nil
+			default:
+				fmt.Println("Not an option")
+			}
+			//return 0, err
 		}
-		//return 0, err
 	}
-	return 0, err
+	return 0, nil
 }
 
 //Identification is a function that asks very basically the user to inform the program his office
@@ -247,6 +257,9 @@ func SendMoney(client *multichain.Client, res3 string, asset string) error {
 
 // ChoiceAdmin is a function that open the Menu for admin functions.
 func ChoiceAdmin(client *multichain.Client, asset string) error {
+	c := exec.Command("clear") // Efface l'écran
+	c.Stdout = os.Stdout
+	c.Run()
 	var res1 int
 	fmt.Printf("=========== MENU ADMIN ========== \n Creer une nouvelle adresse dans le portefeuille 1) \n Crediter une adresse 2) \n Sortie 0) \n ============================== \n")
 	_, err := fmt.Scanf("%d\n", &res1)
@@ -264,8 +277,9 @@ func ChoiceAdmin(client *multichain.Client, asset string) error {
 			return nil
 		}
 	case 0: // Exit
-		fmt.Println("Exiting...")
-		os.Exit(0)
+		//fmt.Println("Exiting...")
+		//os.Exit(0)
+		return nil
 	default:
 		fmt.Println("Not an option")
 	}
@@ -280,6 +294,9 @@ func ChoiceAdmin(client *multichain.Client, asset string) error {
 
 // ChoiceClient is a Function that starts a menu for the Client Options
 func ChoiceClient(client *multichain.Client, RewardName string, address string) error {
+	c := exec.Command("clear") // Efface l'écran
+	c.Stdout = os.Stdout
+	c.Run()
 	var res1 int
 	fmt.Printf("=========== MENU CLIENT ========== \n Consulter son portefeuille 1) \n Consulter les adresses 2) \n Virement 3) \n Sortie 0) \n ============================== \n")
 	_, err := fmt.Scanf("%d\n", &res1)
@@ -307,8 +324,9 @@ func ChoiceClient(client *multichain.Client, RewardName string, address string) 
 			return err
 		}
 	case 0: // Exit
-		fmt.Println("Exiting...")
-		os.Exit(0)
+		//	fmt.Println("Exiting...")
+		//os.Exit(0)
+		return nil
 	default:
 		fmt.Println("Not an option")
 	}
@@ -319,6 +337,9 @@ func ChoiceClient(client *multichain.Client, RewardName string, address string) 
 
 // GetGlobalAdresses is a function that returns an array of the available adresses
 func GetGlobalAdresses(client *multichain.Client) []string {
+	c := exec.Command("clear") // Efface l'écran
+	c.Stdout = os.Stdout
+	c.Run()
 	tabret := make([]string, 0)
 	params := []interface{}{"receive"}
 	msg := client.Command( // It will do the manual command
@@ -337,6 +358,8 @@ func GetGlobalAdresses(client *multichain.Client) []string {
 		tabret = append(tabret, plip) // Adding the addresses
 		fmt.Printf("%s \n ==================== \n", tabret[j])
 	}
+	var input string
+	fmt.Scanln(&input)
 	return tabret
 }
 
@@ -461,6 +484,9 @@ func GetPort(chain string) int {
 
 //GetWalletBalances Is a function that will return the summed ammount of all the assets contained in the addresses
 func GetWalletBalances(client *multichain.Client) ([]byte, error) {
+	c := exec.Command("clear") // Efface l'écran
+	c.Stdout = os.Stdout
+	c.Run()
 	tab := GetLocalAddresses(client)    // Get the wallet addresses
 	length := len(tab)                  // Number of addresses stored
 	balances := make([]float64, length) // Create array of float, flexible length
@@ -506,6 +532,9 @@ func GetWalletBalances(client *multichain.Client) ([]byte, error) {
 
 //CreateAddress is a function that creates a new address within the wallet and grant them with the basic permissions
 func CreateAddress(client *multichain.Client) bool {
+	c := exec.Command("clear") // Efface l'écran
+	c.Stdout = os.Stdout
+	c.Run()
 	res, err := client.GetNewAddress()
 	if err != nil {
 		fmt.Printf("Impossible de créer la nouvelle adresse. \n %s \n", err)
@@ -523,6 +552,9 @@ func CreateAddress(client *multichain.Client) bool {
 
 //IssueMoney is a function that allows to credit some money to an user choosen address.
 func IssueMoney(client *multichain.Client, asset string) bool {
+	c := exec.Command("clear") // Efface l'écran
+	c.Stdout = os.Stdout
+	c.Run()
 	var res int
 	var qt float64
 
