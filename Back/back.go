@@ -506,7 +506,8 @@ func GetWalletBalances(client *multichain.Client) ([]byte, error) {
 			Balances:    balances[i],
 			CurrentTime: timestamp,
 		}
-
+		var input string
+		fmt.Scanln(&input)
 	}
 	fmt.Printf("Pour un total de: %f AmaCoin \n", total)
 	// Put in mapper amount of money indexed by the address corresponding
