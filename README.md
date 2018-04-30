@@ -1,20 +1,12 @@
 # 1PoC
 Poc on multichain, transactions between peers
-==========================================================
-==========================================================
+
 HOW TO INSTALL AND RUN THE PROTOTYPE
-    /\
-   /  \
-  /  | \
- /   .  \ 		WORK IN PROGRESS
-/--------\
-==========================================================
-==========================================================
 
 1) RUN INSTALL_ORIGIN_BAT IN BAT_FILES DIRECTORY
    This will download multichain, install it, create the chain, and launch the node
 
-2) Go in amaris internal solution directory go to the first directory and run a powershell within and run "ng serve" inside it
+2) Go in amaris internal solution directory go to the first directory and run a powershell within and run `ng serve` inside it
 
 3) Go in server go directory, src and run src.exe 
 
