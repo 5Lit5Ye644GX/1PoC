@@ -522,7 +522,7 @@ func GetWalletBalances(client *multichain.Client) ( /*[]byte*/ []float64, error)
 		}
 		return res2B, nil // Return the result and an error code (here everything is Ok)
 	*/
-	return nil, tabul
+	return tabul, nil
 }
 
 ////////////////////  A D M I N  C O M M A N D S  ////////////////////
