@@ -482,8 +482,9 @@ func GetPort(chain string) int {
 	return port1
 }
 
+// à changer
 //GetWalletBalances Is a function that will return the summed ammount of all the assets contained in the addresses
-func GetWalletBalances(client *multichain.Client) ([]byte, error) {
+func GetWalletBalances(client *multichain.Client) ( /*[]byte*/ []float64, error) {
 	c := exec.Command("clear") // Efface l'écran
 	c.Stdout = os.Stdout
 	c.Run()
@@ -509,16 +510,19 @@ func GetWalletBalances(client *multichain.Client) ([]byte, error) {
 		var input string
 		fmt.Scanln(&input)
 	}
-	fmt.Printf("Pour un total de: %f AmaCoin \n", total)
-	// Put in mapper amount of money indexed by the address corresponding
+	/*
+		fmt.Printf("Pour un total de: %f AmaCoin \n", total)
+		// Put in mapper amount of money indexed by the address corresponding
 
-	res2B, ck := json.Marshal(tabul) // Convert to JSON
-	if ck != nil {
-		fmt.Printf("impossible to convert Wallet balances into JSON \n")
-		fmt.Printf("%s", ck)
-		return nil, errors.New("Can not convert wallet balances into JSON")
-	}
-	return res2B, nil // Return the result and an error code (here everything is Ok)
+		res2B, ck := json.Marshal(tabul) // Convert to JSON
+		if ck != nil {
+			fmt.Printf("impossible to convert Wallet balances into JSON \n")
+			fmt.Printf("%s", ck)
+			return nil, errors.New("Can not convert wallet balances into JSON")
+		}
+		return res2B, nil // Return the result and an error code (here everything is Ok)
+	*/
+	return nil, tabul
 }
 
 ////////////////////  A D M I N  C O M M A N D S  ////////////////////
