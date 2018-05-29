@@ -484,7 +484,7 @@ func GetPort(chain string) int {
 
 // à changer
 //GetWalletBalances Is a function that will return the summed ammount of all the assets contained in the addresses
-func GetWalletBalances(client *multichain.Client) ( /*[]byte*/ []float64, error) {
+func GetWalletBalances(client *multichain.Client) ([]float64, error) {
 	c := exec.Command("clear") // Efface l'écran
 	c.Stdout = os.Stdout
 	c.Run()
@@ -497,7 +497,6 @@ func GetWalletBalances(client *multichain.Client) ( /*[]byte*/ []float64, error)
 	heure := time.Now().Local()
 	timestamp := heure.Format("2006-01-02T15:04:05.999999999Z07:00")
 	for i := 0; i < len(tab); i++ {
-		//balances[i] = float64(i)*0.212 + 1
 		balances[i] = GetAddressBalance(client, tab[i])
 		fmt.Printf("L'addresse %d contient %f AmaCoin \n", i, balances[i])
 		total = total + balances[i]
@@ -510,21 +509,22 @@ func GetWalletBalances(client *multichain.Client) ( /*[]byte*/ []float64, error)
 		var input string
 		fmt.Scanln(&input)
 	}
-	/*
-		fmt.Printf("Pour un total de: %f AmaCoin \n", total)
-		// Put in mapper amount of money indexed by the address corresponding
 
-		res2B, ck := json.Marshal(tabul) // Convert to JSON
-		if ck != nil {
-			fmt.Printf("impossible to convert Wallet balances into JSON \n")
-			fmt.Printf("%s", ck)
-			return nil, errors.New("Can not convert wallet balances into JSON")
-		}
-		return res2B, nil // Return the result and an error code (here everything is Ok)
-	*/
 	return balances, nil
 }
 
+/*
+	fmt.Printf("Pour un total de: %f AmaCoin \n", total)
+	// Put in mapper amount of money indexed by the address corresponding
+
+	res2B, ck := json.Marshal(tabul) // Convert to JSON
+	if ck != nil {
+		fmt.Printf("impossible to convert Wallet balances into JSON \n")
+		fmt.Printf("%s", ck)
+		return nil, errors.New("Can not convert wallet balances into JSON")
+	}
+	return res2B, nil // Return the result and an error code (here everything is Ok)
+*/
 ////////////////////  A D M I N  C O M M A N D S  ////////////////////
 //																	//
 // grant: connect receive send admin mine							//
