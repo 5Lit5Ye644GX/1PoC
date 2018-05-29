@@ -43,6 +43,7 @@ func main() {
 	}
 	cmd := exec.Command(".\\multichaind.exe", "Amacoin")
 	err31 := cmd.Start()
+	fmt.Printf("Est-ce que ça tourne LOOOOOOOOOOOOOOOOOOOOL \n")
 	if err31 != nil {
 		fmt.Printf("Est-ce que ça tourne ?: %s \n ", err31)
 	}
