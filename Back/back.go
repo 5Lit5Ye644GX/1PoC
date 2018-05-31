@@ -13,6 +13,7 @@ import (
 	"os/exec"
 	"os/user"
 	"regexp"
+	"runtime"
 	"strconv"
 	"time"
 
@@ -47,7 +48,15 @@ func main() {
 	if err31 != nil {
 		fmt.Printf("Est-ce que ça tourne ?: %s \n ", err31)
 	}
+	if runtime.GOOS == "windows" {
+		fmt.Println("Hello from Windows \n")
+	}
 
+	if runtime.GOOS == "linux" {
+		fmt.Println("Hello from linux \n")
+	} else {
+		fmt.Printf("Hello not from Linux lel \n")
+	}
 	duration := time.Duration(3) * time.Second
 	time.Sleep(duration) // little sleep  (3s) before connecting
 	////////////////////////// Démarrage de multichaind.exe Amacoin@IP:Port
@@ -412,13 +421,21 @@ func GetLogins(chain string) []string {
 		log.Fatal("[FATAL] Could not get user from Multichain", err)
 	}
 
-	login := "NULL"              // Case in which we cannot find any login.
-	password := "NULL"           // Case in which we cannot find any password.
-	path1 := user.HomeDir + "\\" //////////////////// PATH DIRECTORY FOR WINDOWS USERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	path2 := "AppData\\Roaming\\Multichain\\"
-	path3 := chain + "\\"
+	login := "NULL"    // Case in which we cannot find any login.
+	password := "NULL" // Case in which we cannot find any password.
 	path4 := "multichain.conf"
-	path := path1 + path2 + path3 + path4
+	var path string
+	if runtime.GOOS == "windows" { //////////////////// PATH DIRECTORY FOR WINDOWS USERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		fmt.Println("Hello from Windows \n")
+		path1 := user.HomeDir + "\\"
+		path2 := "AppData\\Roaming\\Multichain\\"
+		path3 := chain + "\\"
+		path = path1 + path2 + path3 + path4
+	} else { ///////////////////////////// PATH DIRECTORY FOR LINUX MAC ... ///////////////
+		path1 := user.HomeDir + "/.multichain/"
+		path2 := chain + "/"
+		path = path1 + path2 + path4
+	}
 	inFile, err1 := os.Open(path)
 
 	if err1 != nil {
@@ -454,12 +471,20 @@ func GetPort(chain string) int {
 		log.Fatal("[FATAL] Could not get user from Multichain", err)
 	}
 
-	port := "NULL"               // Case in which we cannot find any port.
-	path1 := user.HomeDir + "\\" // Windows Path in which multichain needs to be installed
-	path2 := "AppData\\Roaming\\Multichain\\"
-	path3 := chain + "\\"
+	port := "NULL" // Case in which we cannot find any port.
 	path4 := "params.dat"
-	path := path1 + path2 + path3 + path4
+	var path string
+	if runtime.GOOS == "windows" { //////////////////// PATH DIRECTORY FOR WINDOWS USERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		fmt.Println("Hello from Windows \n")
+		path1 := user.HomeDir + "\\"
+		path2 := "AppData\\Roaming\\Multichain\\"
+		path3 := chain + "\\"
+		path = path1 + path2 + path3 + path4
+	} else { ///////////////////////////// PATH DIRECTORY FOR LINUX MAC ... ///////////////
+		path1 := user.HomeDir + "/.multichain/"
+		path2 := chain + "/"
+		path = path1 + path2 + path4
+	}
 	inFile, err1 := os.Open(path) // Open path
 
 	if err1 != nil {
